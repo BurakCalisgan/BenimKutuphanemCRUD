@@ -20,14 +20,16 @@ public class BookAdapter extends BaseAdapter{
     private Context context;
     private List<Book> books;
     DatabaseReference databaseReference;
-    EditText edtBookName;
+    EditText edtBookName, edtAuthor, edtNumberOfPages;
     LayoutInflater inflater;
 
-    public BookAdapter(Context context, List<Book> books, DatabaseReference databaseReference, EditText edtBookName) {
+    public BookAdapter(Context context, List<Book> books, DatabaseReference databaseReference, EditText edtBookName, EditText edtAuthor, EditText edtNumberOfPages) {
         this.context = context;
         this.books = books;
         this.databaseReference = databaseReference;
         this.edtBookName = edtBookName;
+        this.edtAuthor = edtAuthor;
+        this.edtNumberOfPages = edtNumberOfPages;
         inflater = LayoutInflater.from(this.context);
     }
 
@@ -53,11 +55,15 @@ public class BookAdapter extends BaseAdapter{
             convertView = inflater.inflate(R.layout.layout_book_list,parent,false);
 
         TextView txtBookName = convertView.findViewById(R.id.txtBookName);
+        TextView txtAuthor = convertView.findViewById(R.id.txtAuthor);
+        TextView txtNumberOfPages = convertView.findViewById(R.id.txtNumberOfPages);
         Button btnDelete = convertView.findViewById(R.id.btnDelete);
         Button btnUpdate = convertView.findViewById(R.id.btnUpdate);
 
         final Book book = books.get(position);
         txtBookName.setText(book.getBookName());
+        txtAuthor.setText(book.getAuthor());
+        txtNumberOfPages.setText(book.getNumberOfPages());
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,9 @@ public class BookAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 edtBookName.setText(book.getBookName());
+                edtAuthor.setText(book.getAuthor());
+                edtNumberOfPages.setText(book.getNumberOfPages());
+
                 MainActivity.bookId = book.getId();
 
             }

@@ -17,12 +17,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnSave;
-    EditText edtBookName;
+    EditText edtBookName, edtAuthor, edtNumberOfPages;
     DatabaseReference databaseReference;
     ListView listViewBooks;
     BookAdapter bookAdapter;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
         books = new ArrayList<Book>();
         btnSave = findViewById(R.id.btnSave);
         edtBookName = findViewById(R.id.edtBookName);
+        edtAuthor = findViewById(R.id.edtAuthor);
+        edtNumberOfPages = findViewById(R.id.edtNumberOfPages);
         listViewBooks = findViewById(R.id.lvBookList);
 
 
@@ -49,11 +52,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String bookName = edtBookName.getText().toString();
+                String author = edtAuthor.getText().toString();
+                String numberOfPages = edtNumberOfPages.getText().toString();
 
                 if (TextUtils.isEmpty(bookId)){
                     //Save
                     String id = databaseReference.push().getKey();
-                    Book book = new Book(id,bookName);
+                    Book book = new Book(id,bookName,author,numberOfPages);
                     databaseReference.child(id).setValue(book);
 
                     Toast.makeText(getApplicationContext(),"Kitap Başarıyla Eklendi.", Toast.LENGTH_SHORT).show();
@@ -61,12 +66,16 @@ public class MainActivity extends AppCompatActivity {
                 else{
                     //update
                     databaseReference.child(bookId).child("bookName").setValue(bookName);
+                    databaseReference.child(bookId).child("author").setValue(author);
+                    databaseReference.child(bookId).child("numberOfPages").setValue(numberOfPages);
 
                     Toast.makeText(getApplicationContext(),"Kitap Başarıyla Güncellendi.",Toast.LENGTH_SHORT).show();
                     bookId = null;
 
                 }
                 edtBookName.setText(null);
+                edtAuthor.setText(null);
+                edtNumberOfPages.setText(null);
             }
         });
 
@@ -82,14 +91,20 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 books.clear();
                 Book book;
+                String id ,bookName, author, numberOfPages;
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()){
                     Map<String,String> map = (Map<String,String>) postSnapshot.getValue();
+                    id = map.get("id");
+                    bookName = map.get("bookName");
+                    author = map.get("author");
+                    numberOfPages = map.get("numberOfPages");
 
-                    book =  new Book(map.get("id"),map.get("bookName"));
+
+                    book =  new Book(id,bookName,author,numberOfPages);
                     books.add(book);
                 }
 
-                bookAdapter = new BookAdapter(getApplicationContext(),books,databaseReference,edtBookName);
+                bookAdapter = new BookAdapter(getApplicationContext(),books,databaseReference,edtBookName,edtAuthor,edtNumberOfPages);
                 listViewBooks.setAdapter(bookAdapter);
 
             }

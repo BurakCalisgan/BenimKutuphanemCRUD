@@ -8,59 +8,105 @@
     tools:layout_editor_absoluteY="81dp">
 
 
+    <TextView
+        android:id="@+id/txtvNumberOfPages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="35dp"
+        android:text="Sayfa"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtvAuthor" />
+
     <EditText
         android:id="@+id/edtBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:hint="Kitap Adı"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Yazar Adı"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBookName" />
+
+    <EditText
+        android:id="@+id/edtNumberOfPages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="Sayfa Sayısı"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtAuthor" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="33dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/colorPrimary"
         android:text="Kaydet"
-        app:layout_constraintBottom_toTopOf="@+id/txtvBookList"
-        app:layout_constraintEnd_toEndOf="@+id/edtBookName"
-        app:layout_constraintTop_toBottomOf="@+id/edtBookName" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtNumberOfPages" />
 
     <TextView
-        android:id="@+id/txtvBookList"
+        android:id="@+id/txtvBookName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="8dp"
-        android:text="Kitap Listesi"
+        android:layout_marginTop="16dp"
+        android:text="Kitap Adı"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/txtvLine"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
+        android:text="Yazar"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/edtAuthor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtBookName" />
 
     <TextView
         android:id="@+id/txtvLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="13dp"
         android:text="--------------------------------------------------"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/lvBookList"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtvBookList" />
+        app:layout_constraintEnd_toEndOf="@+id/btnSave"
+        app:layout_constraintTop_toBottomOf="@+id/btnSave" />
 
     <ListView
         android:id="@+id/lvBookList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
